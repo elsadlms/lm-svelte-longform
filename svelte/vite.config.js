@@ -9,7 +9,12 @@ export default defineConfig(({ command }) => {
     export const update = window.__svelte_scrllgngn_module.update
   `
 
-  const filename = process.env.VITE_MODULE ?? 'build'
+  const inputFile = process.env.SNIPPET === 'true' ? 'snippet' : 'main';
+
+  const filename =
+    process.env.SNIPPET === 'true'
+      ? 'snippet'
+      : process.env.VITE_MODULE ?? 'build';
 
   return {
     // [WIP] export multiple modules?
@@ -24,7 +29,7 @@ export default defineConfig(({ command }) => {
     },
     build: {
       rollupOptions: {
-        input: `./src/main.js`,
+        input: `./src/${inputFile}.js`,
         output: {
           format: 'iife',
           dir: './public/build',
