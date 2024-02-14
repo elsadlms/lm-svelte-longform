@@ -28,13 +28,15 @@ export default defineConfig(({ command }) => {
       ],
     },
     build: {
+      // pour export le css séparément
+      cssCodeSplit: false,
       rollupOptions: {
         input: `./src/${inputFile}.js`,
         output: {
           format: 'iife',
           dir: './public/build',
           entryFileNames: `${filename}.js`,
-          assetFileNames: 'bundle.css',
+          assetFileNames: `${filename}.[ext]`,
           footer: command === 'build' && moduleExports,
         },
       },
